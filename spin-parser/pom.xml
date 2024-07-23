@@ -35,8 +35,8 @@
                 <artifactId>antlr4-maven-plugin</artifactId>
                 <version>${antlr.version}</version>
                 <configuration>
-                    <sourceDirectory>${basedir}\src\main\java\com\zuomagai\spin\parser</sourceDirectory>
-                    <!-- <outputDirectory>${basedir}\src\main\java\com\zuomagai\spin\parser\.antlr</outputDirectory> -->
+                    <sourceDirectory>${basedir}/src/main/java/com/zuomagai/spin/parser/antlr4</sourceDirectory>
+                    <outputDirectory>${basedir}/src/main/java/com/zuomagai/spin/parser/antlr4-generate</outputDirectory>
                     <includes>
                         <include>MySqlLexer.g4</include>
                         <include>MySqlParser.g4</include>
