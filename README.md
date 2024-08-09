@@ -12,12 +12,15 @@ sql parser &amp; db route &amp; rewrite for table sharding
 
 
 ## sql 支持
+[antlr4 mysql语法定义](https://github.com/susongyan/grammars-v4/tree/master/sql/mysql/Positive-Technologies)
 mysql 官方文档的语法定义 5.6/5.7/8.0 
 - [http://dev.mysql.com/doc/refman/5.6/en/](http://dev.mysql.com/doc/refman/5.6/en/).
 - [http://dev.mysql.com/doc/refman/5.7/en/](http://dev.mysql.com/doc/refman/5.7/en/).
 - [http://dev.mysql.com/doc/refman/8.0/en/](http://dev.mysql.com/doc/refman/8.0/en/).
 
-antlr4 代码生成： 
+
+antlr4 代码生成：
+jdk17
 ```shell
  cd spin-parser
  mvn antlr4:antlr4

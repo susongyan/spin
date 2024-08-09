@@ -30,6 +30,7 @@ build/
 
 ### VS Code ###
 .vscode/
+.antlr
 
 ### Mac OS ###
 .DS_Store

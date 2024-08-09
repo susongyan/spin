@@ -1,4 +1,5 @@
 // Generated from java-escape by ANTLR 4.11.1
+package com.zuomagai.spin.parser.generate;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**

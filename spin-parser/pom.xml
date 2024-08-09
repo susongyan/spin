@@ -16,6 +16,8 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+
+        <antlr4.output.directory>${basedir}/target/generated-sources/antlr4</antlr4.output.directory>
     </properties>
 
     <dependencies>
@@ -35,14 +37,21 @@
                 <artifactId>antlr4-maven-plugin</artifactId>
                 <version>${antlr.version}</version>
                 <configuration>
-                    <sourceDirectory>${basedir}/src/main/java/com/zuomagai/spin/parser/antlr4</sourceDirectory>
-                    <outputDirectory>${basedir}/src/main/java/com/zuomagai/spin/parser/antlr4-generate</outputDirectory>
+                    <sourceDirectory>${basedir}/src/main/antlr4</sourceDirectory>
+                    <!--生成的代码输出到 和自定义包名相同的目录，方便代码管理， 不用每次都生成-->
+                    <outputDirectory>${basedir}/src/main/java/com/zuomagai/spin/parser/generate</outputDirectory>
                     <includes>
                         <include>MySqlLexer.g4</include>
                         <include>MySqlParser.g4</include>
                     </includes>
                     <visitor>true</visitor>
                     <listener>true</listener>
+
+                    <arguments>
+                        <!-- antlr4 命令行参数 -package ${package} 自定义生成代码的包名 -->
+                        <argument>-package</argument>
+                        <argument>com.zuomagai.spin.parser.generate</argument>
+                    </arguments>
                 </configuration>
                 <executions>
                     <execution>
