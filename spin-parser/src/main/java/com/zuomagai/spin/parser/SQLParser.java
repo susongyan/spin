@@ -1,6 +1,11 @@
 package com.zuomagai.spin.parser;
 
+import com.zuomagai.spin.parser.generate.MySqlLexer;
+import com.zuomagai.spin.parser.generate.MySqlParser;
 import com.zuomagai.spin.parser.util.LRUCache;
+import org.antlr.v4.runtime.BailErrorStrategy;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
 
 import java.util.Collections;
 import java.util.Map;
@@ -15,12 +20,22 @@ public class SQLParser {
         }
 
         SQLParseResult result = new SQLParseResult();
-        CACHE.put(sql, result);
+
+        MySqlLexer lexer = new MySqlLexer(CharStreams.fromString(sql));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        MySqlParser parser = new MySqlParser(tokens);
+        parser.setErrorHandler(new BailErrorStrategy()); // fail-fast
+        MySqlParser.RootContext rootContext = parser.root();
+
+        MySQLVisitor visitor = new MySQLVisitor();
+        visitor.visit(rootContext);
+
         //todo parse
         // what to include? used in rule matching &
         // - raw statement
         // - tables
         // - column -> value pairs
+        CACHE.put(sql, result);
         return result;
     }
 }
