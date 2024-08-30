@@ -25,3 +25,5 @@ jdk17
  cd spin-parser
  mvn antlr4:antlr4
  ```
+
+用 antlr4 写自定义分库分表规则表达式 

@@ -24,7 +24,7 @@ public class SQLParser {
         MySqlLexer lexer = new MySqlLexer(CharStreams.fromString(sql));
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         MySqlParser parser = new MySqlParser(tokens);
-        parser.setErrorHandler(new BailErrorStrategy()); // fail-fast
+        parser.setErrorHandler(new BailErrorStrategy()); // fail-fast   catch , back
         MySqlParser.RootContext rootContext = parser.root();
 
         MySQLVisitor visitor = new MySQLVisitor();

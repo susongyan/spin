@@ -4,14 +4,17 @@ import com.zuomagai.spin.parser.generate.MySqlParser;
 import com.zuomagai.spin.parser.generate.MySqlParserBaseVisitor;
 import org.antlr.v4.runtime.TokenStreamRewriter;
 
+import java.util.Map;
+
 public class MySQLRewriter extends MySqlParserBaseVisitor {
 
-    private TokenStreamRewriter tokenStreamRewriter;
+    private final TokenStreamRewriter tokenStreamRewriter;
+    private final Map<String, String> tableMapping;
 
-    public MySQLRewriter(TokenStreamRewriter tokenStreamRewriter) {
+    public MySQLRewriter(TokenStreamRewriter tokenStreamRewriter, Map<String, String> tableMapping) {
         this.tokenStreamRewriter = tokenStreamRewriter;
+        this.tableMapping = tableMapping;
     }
-
 
     @Override
     public Object visitTableName(MySqlParser.TableNameContext ctx) {
