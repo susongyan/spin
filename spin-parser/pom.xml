@@ -28,6 +28,12 @@
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.github.jsqlparser</groupId>
+            <artifactId>jsqlparser</artifactId>
+            <version>4.6</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -43,6 +49,8 @@
                     <includes>
                         <include>MySqlLexer.g4</include>
                         <include>MySqlParser.g4</include>
+                        <include>PlSqlParser.g4</include>
+                        <include>PlSqlLexer.g4</include>
                     </includes>
                     <visitor>true</visitor>
                     <listener>true</listener>
