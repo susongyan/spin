@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>com.zuomagai</groupId>
-    <artifactId>spin-parser</artifactId>
+    <artifactId>spin-parser-antlr4</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>

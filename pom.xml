@@ -6,7 +6,8 @@
   <artifactId>spin</artifactId>
   <packaging>pom</packaging>
   <modules>
-    <module>spin-parser</module>
+    <module>spin-parser-antlr4</module>
+    <module>spin-parser-druid</module>
   </modules>
   <version>1.0-SNAPSHOT</version>
   <name>spin</name>

@@ -1,7 +1,8 @@
 package com.zuomagai.spin.parser;
 
-import com.zuomagai.spin.parser.generate.MySqlLexer;
-import com.zuomagai.spin.parser.generate.MySqlParser;
+import com.alibaba.druid.sql.SQLUtils;
+import com.alibaba.druid.sql.ast.SQLStatement;
+import com.alibaba.druid.util.JdbcConstants;
 import com.zuomagai.spin.parser.generate.PlSqlLexer;
 import com.zuomagai.spin.parser.generate.PlSqlParser;
 import com.zuomagai.spin.parser.util.LRUCache;
@@ -60,12 +61,18 @@ public class SQLParser {
 
 //        Class.forName(MySqlLexer.class.getName());
 
+        String sql = "select COUNT(*) from t_user";
         long begin = System.currentTimeMillis();
-        SQLParser.parse("select COUNT(*) from t_user");
+        SQLParser.parse(sql);
         System.out.println("antlr4 parse: " + (System.currentTimeMillis() - begin) + "ms");
 
-//        begin = System.currentTimeMillis();
-//        CCJSqlParserUtil.parse("select COMMON_MSGID.nextval from dual");
-//        System.out.println("jsql parser: " + (System.currentTimeMillis() - begin) + "ms");
+        begin = System.currentTimeMillis();
+        CCJSqlParserUtil.parse(sql);
+        System.out.println("jsql parser: " + (System.currentTimeMillis() - begin) + "ms");
+
+        begin = System.currentTimeMillis();
+        String dbType = JdbcConstants.ORACLE_DRIVER;
+        SQLStatement statement = SQLUtils.parseSingleStatement(sql, dbType);
+        System.out.println("druid parser: " + (System.currentTimeMillis() - begin) + "ms");
     }
 }
