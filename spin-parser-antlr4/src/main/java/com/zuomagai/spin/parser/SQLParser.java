@@ -1,13 +1,8 @@
 package com.zuomagai.spin.parser;
 
-import com.alibaba.druid.sql.SQLUtils;
-import com.alibaba.druid.sql.ast.SQLStatement;
-import com.alibaba.druid.util.JdbcConstants;
 import com.zuomagai.spin.parser.generate.PlSqlLexer;
 import com.zuomagai.spin.parser.generate.PlSqlParser;
 import com.zuomagai.spin.parser.util.LRUCache;
-import net.sf.jsqlparser.JSQLParserException;
-import net.sf.jsqlparser.parser.CCJSqlParserUtil;
 import org.antlr.v4.runtime.BailErrorStrategy;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -56,23 +51,4 @@ public class SQLParser {
         return result;
     }
 
-    public static void main(String[] args) throws JSQLParserException, InterruptedException, ClassNotFoundException {
-
-
-//        Class.forName(MySqlLexer.class.getName());
-
-        String sql = "select COUNT(*) from t_user";
-        long begin = System.currentTimeMillis();
-        SQLParser.parse(sql);
-        System.out.println("antlr4 parse: " + (System.currentTimeMillis() - begin) + "ms");
-
-        begin = System.currentTimeMillis();
-        CCJSqlParserUtil.parse(sql);
-        System.out.println("jsql parser: " + (System.currentTimeMillis() - begin) + "ms");
-
-        begin = System.currentTimeMillis();
-        String dbType = JdbcConstants.ORACLE_DRIVER;
-        SQLStatement statement = SQLUtils.parseSingleStatement(sql, dbType);
-        System.out.println("druid parser: " + (System.currentTimeMillis() - begin) + "ms");
-    }
 }
