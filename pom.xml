@@ -8,6 +8,7 @@
   <modules>
     <module>spin-parser-antlr4</module>
     <module>spin-parser-druid</module>
+    <module>spin-sqlir</module>
     <module>spin-parser-yacc</module>
     <module>spin-parser-test</module>
   </modules>

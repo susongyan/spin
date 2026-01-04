@@ -9,25 +9,12 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>spin-parser-druid</artifactId>
+    <artifactId>spin-sqlir</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>com.zuomagai</groupId>
-            <artifactId>spin-sqlir</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>1.2.7</version>
-        </dependency>
-    </dependencies>
 
 </project>

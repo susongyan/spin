@@ -1,0 +1,21 @@
+package com.zuomagai.spin.sqlir;
+
+public enum JoinType {
+    COMMA,
+    JOIN,
+    INNER_JOIN,
+    CROSS_JOIN,
+    NATURAL_JOIN,
+    NATURAL_CROSS_JOIN,
+    NATURAL_LEFT_JOIN,
+    NATURAL_RIGHT_JOIN,
+    NATURAL_INNER_JOIN,
+    LEFT_OUTER_JOIN,
+    LEFT_SEMI_JOIN,
+    LEFT_ANTI_JOIN,
+    RIGHT_OUTER_JOIN,
+    FULL_OUTER_JOIN,
+    STRAIGHT_JOIN,
+    OUTER_APPLY,
+    CROSS_APPLY
+}
