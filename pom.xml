@@ -9,6 +9,8 @@
     <!-- <module>spin-parser-antlr4</module> -->
     <module>spin-parser-druid</module>
     <module>spin-sqlir</module>
+    <module>spin-sqlir-rewrite</module>
+    <module>spin-sqlir-emit</module>
     <module>spin-parser-yacc</module>
     <module>spin-parser-test</module>
   </modules>
