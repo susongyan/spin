@@ -12,6 +12,7 @@ import com.zuomagai.spin.sqlir.OrderBy;
 import com.zuomagai.spin.sqlir.OrderByItem;
 import com.zuomagai.spin.sqlir.OrderDirection;
 import com.zuomagai.spin.sqlir.Param;
+import com.zuomagai.spin.sqlir.ParenExpr;
 import com.zuomagai.spin.sqlir.QName;
 import com.zuomagai.spin.sqlir.QueryStmt;
 import com.zuomagai.spin.sqlir.SelectBody;
@@ -98,6 +99,42 @@ public class SqlEmitterTest extends TestCase {
 
         String sql = new OracleEmitter().emit(stmt);
         assertEquals("SELECT 1, 0", sql);
+    }
+
+    public void testMySqlWhereWithParenExpr() {
+        SelectBody body = new SelectBody(false,
+                List.of(),
+                new NamedTable(qname("t"), null, META),
+                new Binary(
+                        new Id(qname("a"), META),
+                        "AND",
+                        new ParenExpr(
+                                new Binary(
+                                        new Id(qname("b"), META),
+                                        "OR",
+                                        new Id(qname("c"), META),
+                                        META),
+                                META),
+                        META),
+                null,
+                META);
+        QueryStmt stmt = new QueryStmt(body, null, null, META);
+
+        String sql = new MySqlEmitter().emit(stmt);
+        assertEquals("SELECT * FROM t WHERE (a AND (b OR c))", sql);
+    }
+
+    public void testMySqlWhereWithParenExprAroundId() {
+        SelectBody body = new SelectBody(false,
+                List.of(),
+                new NamedTable(qname("t"), null, META),
+                new ParenExpr(new Id(qname("a"), META), META),
+                null,
+                META);
+        QueryStmt stmt = new QueryStmt(body, null, null, META);
+
+        String sql = new MySqlEmitter().emit(stmt);
+        assertEquals("SELECT * FROM t WHERE (a)", sql);
     }
 
     private static QName qname(String... parts) {

@@ -22,6 +22,7 @@ import com.zuomagai.spin.sqlir.OrderBy;
 import com.zuomagai.spin.sqlir.OrderByItem;
 import com.zuomagai.spin.sqlir.OrderDirection;
 import com.zuomagai.spin.sqlir.Param;
+import com.zuomagai.spin.sqlir.ParenExpr;
 import com.zuomagai.spin.sqlir.QName;
 import com.zuomagai.spin.sqlir.QueryBody;
 import com.zuomagai.spin.sqlir.QueryStmt;
@@ -315,6 +316,12 @@ public abstract class AbstractSqlEmitter implements SqlEmitter {
             appendUnary(sb, unary);
             return;
         }
+        if (expr instanceof ParenExpr parenExpr) {
+            sb.append('(');
+            appendExprWithoutParens(sb, parenExpr.expr());
+            sb.append(')');
+            return;
+        }
         if (expr instanceof FuncCall call) {
             appendFuncCall(sb, call);
             return;
@@ -344,6 +351,16 @@ public abstract class AbstractSqlEmitter implements SqlEmitter {
             return;
         }
         throw new IllegalArgumentException("Unsupported expression: " + expr);
+    }
+
+    protected void appendExprWithoutParens(StringBuilder sb, Expr expr) {
+        if (expr instanceof Binary binary) {
+            appendExpr(sb, binary.left());
+            sb.append(' ').append(binary.operator()).append(' ');
+            appendExpr(sb, binary.right());
+            return;
+        }
+        appendExpr(sb, expr);
     }
 
     protected void appendUnary(StringBuilder sb, Unary unary) {

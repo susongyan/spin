@@ -6,6 +6,7 @@ import com.zuomagai.spin.sqlir.Expr;
 import com.zuomagai.spin.sqlir.Id;
 import com.zuomagai.spin.sqlir.Meta;
 import com.zuomagai.spin.sqlir.Param;
+import com.zuomagai.spin.sqlir.ParenExpr;
 import com.zuomagai.spin.sqlir.QName;
 import com.zuomagai.spin.sqlir.SelectBody;
 import com.zuomagai.spin.sqlir.SqlTransformer;
@@ -94,6 +95,9 @@ public final class TenantPredicateRewriter extends SqlTransformer {
         }
         if (expr.equals(predicate)) {
             return true;
+        }
+        if (expr instanceof ParenExpr parenExpr) {
+            return containsPredicate(parenExpr.expr(), predicate);
         }
         if (expr instanceof Binary binary && isAnd(binary.operator())) {
             return containsPredicate(binary.left(), predicate) || containsPredicate(binary.right(), predicate);

@@ -10,6 +10,7 @@ import com.zuomagai.spin.sqlir.LiteralType;
 import com.zuomagai.spin.sqlir.Meta;
 import com.zuomagai.spin.sqlir.NamedTable;
 import com.zuomagai.spin.sqlir.Param;
+import com.zuomagai.spin.sqlir.ParenExpr;
 import com.zuomagai.spin.sqlir.QName;
 import com.zuomagai.spin.sqlir.QueryStmt;
 import com.zuomagai.spin.sqlir.SelectBody;
@@ -47,6 +48,22 @@ public class RewriteTest extends TestCase {
                 List.of(new SelectItem(new Star(null, META), null, META)),
                 new NamedTable(qname("users"), null, META),
                 predicate,
+                null,
+                META);
+        QueryStmt stmt = new QueryStmt(body, null, null, META);
+
+        TenantPredicateRewriter rewriter = TenantPredicateRewriter.forColumnParam("tenant_id", ":tenantId");
+        QueryStmt rewritten = (QueryStmt) rewriter.transform(stmt);
+
+        assertSame(stmt, rewritten);
+    }
+
+    public void testTenantPredicateIdempotentWithParenExpr() {
+        Expr predicate = new Binary(id("tenant_id"), "=", new Param(":tenantId", null, META), META);
+        SelectBody body = new SelectBody(false,
+                List.of(new SelectItem(new Star(null, META), null, META)),
+                new NamedTable(qname("users"), null, META),
+                new ParenExpr(predicate, META),
                 null,
                 META);
         QueryStmt stmt = new QueryStmt(body, null, null, META);

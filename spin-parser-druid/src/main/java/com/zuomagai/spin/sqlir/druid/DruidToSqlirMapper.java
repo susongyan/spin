@@ -68,6 +68,7 @@ import com.zuomagai.spin.sqlir.OrderBy;
 import com.zuomagai.spin.sqlir.OrderByItem;
 import com.zuomagai.spin.sqlir.OrderDirection;
 import com.zuomagai.spin.sqlir.Param;
+import com.zuomagai.spin.sqlir.ParenExpr;
 import com.zuomagai.spin.sqlir.QName;
 import com.zuomagai.spin.sqlir.QueryBody;
 import com.zuomagai.spin.sqlir.QueryStmt;
@@ -319,7 +320,12 @@ public final class DruidToSqlirMapper {
         }
         if (expr instanceof SQLBinaryOpExpr binaryOpExpr) {
             String operator = binaryOpExpr.getOperator().getName();
-            return new Binary(mapExpr(binaryOpExpr.getLeft()), operator, mapExpr(binaryOpExpr.getRight()), Meta.empty());
+            Binary binary = new Binary(mapExpr(binaryOpExpr.getLeft()), operator,
+                    mapExpr(binaryOpExpr.getRight()), Meta.empty());
+            if (binaryOpExpr.isParenthesized()) {
+                return new ParenExpr(binary, Meta.empty());
+            }
+            return binary;
         }
         if (expr instanceof SQLUnaryExpr unaryExpr) {
             String operator = unaryExpr.getOperator().name;

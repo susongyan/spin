@@ -125,6 +125,11 @@ public abstract class SqlBaseVisitor<R> implements SqlVisitor<R> {
     }
 
     @Override
+    public R visitParenExpr(ParenExpr expr) {
+        return visitChild(expr.expr());
+    }
+
+    @Override
     public R visitFuncCall(FuncCall call) {
         return visitChildren(call.args());
     }

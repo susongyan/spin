@@ -25,6 +25,8 @@ public interface SqlVisitor<R> {
 
     R visitUnary(Unary unary);
 
+    R visitParenExpr(ParenExpr expr);
+
     R visitFuncCall(FuncCall call);
 
     R visitParam(Param param);

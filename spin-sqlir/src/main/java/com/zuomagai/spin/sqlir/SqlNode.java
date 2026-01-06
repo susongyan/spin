@@ -41,6 +41,9 @@ public sealed interface SqlNode permits Statement, QueryBody, TableSource, Expr,
         if (this instanceof Unary node) {
             return visitor.visitUnary(node);
         }
+        if (this instanceof ParenExpr node) {
+            return visitor.visitParenExpr(node);
+        }
         if (this instanceof FuncCall node) {
             return visitor.visitFuncCall(node);
         }

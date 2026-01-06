@@ -45,6 +45,9 @@ public class SqlTransformer {
         if (node instanceof Unary unary) {
             return transformUnary(unary);
         }
+        if (node instanceof ParenExpr parenExpr) {
+            return transformParenExpr(parenExpr);
+        }
         if (node instanceof FuncCall call) {
             return transformFuncCall(call);
         }
@@ -197,6 +200,14 @@ public class SqlTransformer {
             return unary;
         }
         return new Unary(unary.operator(), expr, unary.meta());
+    }
+
+    public ParenExpr transformParenExpr(ParenExpr parenExpr) {
+        Expr expr = transformExpr(parenExpr.expr());
+        if (expr == parenExpr.expr()) {
+            return parenExpr;
+        }
+        return new ParenExpr(expr, parenExpr.meta());
     }
 
     public FuncCall transformFuncCall(FuncCall call) {
@@ -356,6 +367,9 @@ public class SqlTransformer {
         }
         if (expr instanceof Unary unary) {
             return transformUnary(unary);
+        }
+        if (expr instanceof ParenExpr parenExpr) {
+            return transformParenExpr(parenExpr);
         }
         if (expr instanceof FuncCall call) {
             return transformFuncCall(call);
