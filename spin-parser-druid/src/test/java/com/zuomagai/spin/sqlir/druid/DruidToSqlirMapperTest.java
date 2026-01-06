@@ -34,6 +34,7 @@ import com.alibaba.druid.sql.ast.statement.SQLSelect;
 import com.alibaba.druid.sql.ast.statement.SQLSelectGroupByClause;
 import com.alibaba.druid.sql.ast.statement.SQLSelectOrderByItem;
 import com.alibaba.druid.sql.ast.statement.SQLSelectQueryBlock;
+import com.zuomagai.spin.mapper.DruidToSqlirMapper;
 import com.zuomagai.spin.sqlir.Binary;
 import com.zuomagai.spin.sqlir.CaseExpr;
 import com.zuomagai.spin.sqlir.DeleteStmt;

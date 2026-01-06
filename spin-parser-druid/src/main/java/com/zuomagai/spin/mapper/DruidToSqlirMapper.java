@@ -1,4 +1,4 @@
-package com.zuomagai.spin.sqlir.druid;
+package com.zuomagai.spin.mapper;
 
 import com.alibaba.druid.sql.ast.SQLCommentHint;
 import com.alibaba.druid.sql.ast.SQLExpr;
