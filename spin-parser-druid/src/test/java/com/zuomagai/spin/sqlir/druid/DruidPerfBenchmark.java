@@ -1,4 +1,4 @@
-package com.zuomagai.spin.parser;
+package com.zuomagai.spin.sqlir.druid;
 
 import com.alibaba.druid.DbType;
 import com.alibaba.druid.sql.SQLUtils;
