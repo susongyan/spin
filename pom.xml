@@ -11,6 +11,7 @@
     <module>spin-sqlir</module>
     <module>spin-sqlir-rewrite</module>
     <module>spin-sqlir-emit</module>
+    <module>spin-sqlir-demo</module>
     <module>spin-parser-yacc</module>
     <!-- <module>spin-parser-test</module> -->
   </modules>
